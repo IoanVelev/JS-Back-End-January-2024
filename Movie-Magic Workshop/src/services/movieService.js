@@ -1,36 +1,14 @@
 const Movie = require('../models/Movie');
 
 
-const movies = [{
-    _id: 1,
-    title: 'Jungle Cruise',
-    genre: 'Adventure',
-    director: 'Spilberg',
-    year: '2020',
-    imageUrl: '/img/jungle-cruise.jpeg',
-    rating: '5',
-    description: 'cool movie'
-}];
+exports.getAll = () => Movie.find();
 
+exports.getOne = (movieId) => Movie.findById(movieId);
 
-exports.getAll = () => {
-return movies.slice();
-}
+exports.create = (movieData) => Movie.create(movieData);
 
-exports.getOne = (movieId) => {
-    const movie =  movies.find(movie => movie._id == movieId);
-
-    return movie;
-}
-
-exports.create = async (movieData) => {
-    const result = await Movie.create(movieData);
-
-    return result;
-}
-
-exports.search = (title, genre, year) => {
-    let result = movies.slice();
+exports.search = async (title, genre, year) => {
+    let result = await Movie.find().lean();
 
     if (title) {
         result = result.filter(movie => movie.title.toLowerCase().includes(title.toLowerCase()));

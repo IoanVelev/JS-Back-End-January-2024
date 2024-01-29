@@ -33,7 +33,7 @@ const movieSchema = new mongoose.Schema({
     imageUrl: {
         required: true,
         type: String,
-        match: /^https?/
+        match: /^https?:\/\//
     }
 });
 
