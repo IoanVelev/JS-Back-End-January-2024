@@ -23,6 +23,10 @@ router.get('/movies/:movieId', async (req, res) => {
     const movie = await movieService.getOne(movieId).lean();
     movie.rating = new Array(Number(movie.rating)).fill(true);
     res.render('details', { movie });
+});
+
+router.get('/movies/:movieId/attach/cast', (req, res) => {
+    res.render('movie/attach');
 })
 
 module.exports = router;
