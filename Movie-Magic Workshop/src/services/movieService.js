@@ -26,13 +26,16 @@ exports.search = async (title, genre, year) => {
 }
 
 exports.attach = async (movieId, castId) => {
-    // const movie = await this.getOne(movieId)
+    const movie = await this.getOne(movieId);
+    let isAttached = false;
 
-    
-    // movie.casts.push(castId);
+    movie.casts.forEach(cast => {
+        if (cast._id == castId) {
+            isAttached = true;
+        }
+    });
 
-    // return movie.save();
-
-    return Movie.findByIdAndUpdate(movieId, {$push: { casts: castId }})
-    
+    if (isAttached === false) {
+        return Movie.findByIdAndUpdate(movieId, {$push: { casts: castId }});
+    }
 }
