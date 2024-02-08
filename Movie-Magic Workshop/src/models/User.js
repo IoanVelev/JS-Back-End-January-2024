@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     email: {
         required: true,
         type: String,
-        lowercase: true
+        lowercase: true,
+        unique: true
     },
     password: {
         required: true,
