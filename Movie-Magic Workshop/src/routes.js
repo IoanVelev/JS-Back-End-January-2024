@@ -8,7 +8,7 @@ const authController = require('./controllers/authController');
 router.use(homeController);
 router.use(movieController);
 router.use('/cast', castController);
-router.use('/auth', authController)
+router.use('/auth', authController);
 
 router.get('*', (req, res) => {
     res.redirect('/404');
