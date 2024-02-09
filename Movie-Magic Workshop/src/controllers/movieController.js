@@ -29,7 +29,7 @@ router.get('/movies/:movieId', async (req, res) => {
     const isOwner = movie.owner == req.user?._id;
 
     movie.rating = new Array(Number(movie.rating)).fill(true);
-    res.render('movie/details', { movie, isOwner });
+    res.render('movie/details', { movie, isOwner});
 });
 
 router.get('/movies/:movieId/attach/cast', async (req, res) => {
