@@ -4,12 +4,15 @@ const movieService = require('../services/movieService');
 const castService = require('../services/castService');
 const { isAuth } = require('../middlewares/authMiddleware')
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('create');
 });
 
-router.post('/create', async (req, res) => {
-    const newMovie = req.body;
+router.post('/create', isAuth, async (req, res) => {
+    const newMovie = {
+        ...req.body,
+        owner: req.user._id
+    };
 
     try {
         await movieService.create(newMovie);
