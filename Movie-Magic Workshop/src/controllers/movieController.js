@@ -27,7 +27,7 @@ router.get('/movies/:movieId', async (req, res) => {
     const casts = await castService.getByIds(movie.casts).lean();
 
     movie.rating = new Array(Number(movie.rating)).fill(true);
-    res.render('details', { movie, casts });
+    res.render('movie/details', { movie, casts });
 });
 
 router.get('/movies/:movieId/attach/cast', async (req, res) => {
