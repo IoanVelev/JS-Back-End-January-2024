@@ -5,19 +5,19 @@ const movieSchema = new mongoose.Schema({
         required: true,
         type: String,
         minLength: [5, 'Movie name needs to be longer'],
-        match: /^[a-zA-Z0-9]+$/
+        match: /^[a-zA-Z0-9/s]+$/
     },
     genre: { 
         required: true,
         type: String,
         minLength: [5, 'Movie name needs to be longer'],
-        match: /^[a-zA-Z0-9]+$/,
+        match: /^[a-zA-Z0-9/s]+$/,
     },
     director: { 
         required: true,
         type: String,
         minLength: [5, 'Movie name needs to be longer'],
-        match: /^[a-zA-Z0-9]+$/
+        match: /^[a-zA-Z0-9/s]+$/
     },
     year: {
         required: true,
@@ -34,7 +34,8 @@ const movieSchema = new mongoose.Schema({
     description: {
         required: true,
         type: String,
-        maxLength: 1000
+        maxLength: 1000,
+        match: /^[a-zA-Z0-9/s]+$/
     },
     imageUrl: {
         required: true,
