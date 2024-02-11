@@ -1,12 +1,13 @@
 const router = require('express').Router();
+const User = require('../models/User');
 const authService = require('../services/authService');
-const { getErrorMessage } = require('../utils/errorUitls');
+const { getErrorMessage, validate } = require('../utils/errorUitls');
 
 router.get('/register', (req, res) => {
     res.render('auth/register');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', validate(User), async (req, res) => {
     const userData = req.body;
 
     try {
@@ -26,8 +27,6 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-
-    
 
     try {
         const token = await authService.login(email, password);
