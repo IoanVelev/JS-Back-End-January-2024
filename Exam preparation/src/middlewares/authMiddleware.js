@@ -2,7 +2,7 @@ const jwt = require('../lib/jwt');
 const { SECRET } = require('../config/config');
 
 exports.authMiddleware = async (req, res, next) => {
-    const token = res.cookies['auth'];
+    const token = req.cookies['auth'];
 
     if (!token) {
        return next();
@@ -18,4 +18,12 @@ exports.authMiddleware = async (req, res, next) => {
         res.clearCookie('auth');
         res.redirect('/auth/login');
     }
+}
+
+exports.isAuth = (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('auth/login');
+    }
+
+    next();
 }
