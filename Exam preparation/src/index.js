@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const handlebars = require('express-handlebars');
+const mongoose = require('mongoose');
 
 const routes = require('./routes');
 
@@ -15,5 +16,10 @@ app.set('views', path.resolve('src/views'));
 app.use(routes);
 
 
+mongoose.connect('mongodb://localhost:27017/course-book');
+
+mongoose.connection.on('connected', () => console.log('DB is connected'));
+mongoose.connection.on('disconnected', () => console.log('DB is disconnected'));
+mongoose.connection.on('error', (err) => console.log(err));
 
 app.listen(3000, () => console.log('Server is listening on port: http://localhost:3000'));
