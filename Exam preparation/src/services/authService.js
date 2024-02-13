@@ -1,5 +1,8 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const jwt = require('../lib/jwt');
+
+const SECRET = 'nfaifio13fi13f133t1jafqafqwmffg4jh5j3qg';
 
 exports.register = async (userData) => {
     if (userData.password !== userData.rePassword) {
@@ -12,10 +15,14 @@ exports.register = async (userData) => {
         throw new Error('User already exists');
     }
 
-    return User.create(userData);
+    const createdUser = await User.create(userData);
+
+    const token = generateToken(createdUser);
+
+    return token;
 }
 
-exports.login = async ({ email, password}) => {
+exports.login = async ({ email, password }) => {
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -27,5 +34,22 @@ exports.login = async ({ email, password}) => {
     if (!isValid) {
         throw new Error('Email or password is invalid');
     }
+
+    const token = await generateToken(user);
+
+    return token;
+
+}
+
+async function generateToken(user) {
+    const payload = {
+        _id: user._id,
+        user: user.username,
+        email: user.email
+    }
+
+    const token = await jwt.sign(payload, SECRET, { expiresIn: '2h' });
+
+    return token;
 
 }
