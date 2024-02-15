@@ -3,6 +3,8 @@ const User = require('../models/User');
 
 exports.getAll = () => Course.find();
 
+exports.getOne = (courseId) => Course.findById(courseId);
+
 exports.create = async (userId, courseData) => {
 
     const createdCourse = await Course.create({
