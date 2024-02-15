@@ -9,6 +9,12 @@ router.get('/', async (req, res) => {
     res.render('courses/catalog', { courses });
 });
 
+router.get('/:courseId/details', async (req, res) => {
+    const course = await courseService.getDetailedOne(req.params.courseId).lean();
+
+    res.render('courses/details', { ...course });
+});
+
 router.get('/create', isAuth, (req, res) => {
     res.render('courses/create');
 });
@@ -25,12 +31,5 @@ router.post('/create', isAuth, async (req, res) => {
 
 });
 
-router.get('/:courseId/details', async (req, res) => {
-    const course = await courseService.getOne(req.params.courseId).lean();
-
-    const owner = await userService.getUser(course.owner);
-
-    res.render('courses/details', { ...course, owner: owner.email });
-});
 
 module.exports = router;
