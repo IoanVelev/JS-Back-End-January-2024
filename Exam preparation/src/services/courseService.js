@@ -19,6 +19,9 @@ exports.create = async (userId, courseData) => {
     return createdCourse;
 }
 
+exports.edit = (courseId, editedCourseData) => Course.findByIdAndUpdate(courseId, editedCourseData);
+    
+
 exports.signUp = async (courseId, userId) => {
     await Course.findByIdAndUpdate(courseId, {$push: { signUpList: userId }});
     await User.findByIdAndUpdate(userId, {$push: { signedUpCourses: courseId }});

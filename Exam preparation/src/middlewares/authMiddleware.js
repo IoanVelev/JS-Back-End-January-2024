@@ -1,5 +1,6 @@
 const jwt = require('../lib/jwt');
 const { SECRET } = require('../config/config');
+const courseService = require('../services/courseService');
 
 exports.authMiddleware = async (req, res, next) => {
     const token = req.cookies['auth'];
@@ -36,3 +37,4 @@ exports.isGuest = (req, res, next) => {
 
     next();
 }
+
