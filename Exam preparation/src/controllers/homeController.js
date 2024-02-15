@@ -7,8 +7,6 @@ router.get('/', (req, res) => {
 
 router.get('/test', isAuth, (req, res) => {
     res.send('You are authorized');
-})
-
-
+});
 
 module.exports = router;
