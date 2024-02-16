@@ -53,5 +53,11 @@ router.post('/:courseId/edit', isOwner, async (req, res) => {
     res.redirect(`/courses/${req.params.courseId}/details`);
 });
 
+router.get('/:courseId/delete', isOwner, async (req, res) => {
+    await courseService.delete(req.params.courseId);
+
+    res.redirect('/');
+});
+
 
 module.exports = router;
