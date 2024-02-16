@@ -12,11 +12,11 @@ router.get('/', async (req, res) => {
 router.get('/:courseId/details', async (req, res) => {
     const course = await courseService.getDetailedOne(req.params.courseId).lean();
 
-    const isOwner = req.user?._id == course.owner._id && course.owner._id;
+    const isCourseOwner = req.user?._id == course.owner._id && course.owner._id;
     const signUpUsers = course.signUpList.map(user => user.username).join(', ');
     const isSigned = course.signUpList.some(user => user._id == req.user?._id);
 
-    res.render('courses/details', { ...course, isOwner, signUpUsers, isSigned });
+    res.render('courses/details', { ...course, isCourseOwner, signUpUsers, isSigned });
 });
 
 router.get('/:courseId/sign-up', async (req, res) => {
