@@ -19,7 +19,7 @@ exports.create = async (userId, courseData) => {
     return createdCourse;
 }
 
-exports.edit = (courseId, editedCourseData) => Course.findByIdAndUpdate(courseId, editedCourseData);
+exports.edit = (courseId, editedCourseData) => Course.findByIdAndUpdate(courseId, editedCourseData, { runValidators: true });
     
 exports.signUp = async (courseId, userId) => {
     await Course.findByIdAndUpdate(courseId, {$push: { signUpList: userId }});

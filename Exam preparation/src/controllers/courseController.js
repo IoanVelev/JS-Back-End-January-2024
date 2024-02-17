@@ -48,9 +48,14 @@ router.get('/:courseId/edit', isOwner, async (req, res) => {
 
 router.post('/:courseId/edit', isOwner, async (req, res) => {
     const editedCourseData = req.body;
-    await courseService.edit(req.params.courseId, editedCourseData);
     
-    res.redirect(`/courses/${req.params.courseId}/details`);
+    try {
+        await courseService.edit(req.params.courseId, editedCourseData);
+
+        res.redirect(`/courses/${req.params.courseId}/details`);
+    } catch (err) {
+        res.render('courses/edit', { ...editedCourseData, error: getErrorMessage(err) })
+    }
 });
 
 router.get('/:courseId/delete', isOwner, async (req, res) => {
