@@ -11,10 +11,10 @@ router.get('/', async (req, res) => {
 
 router.get('/user/profile', isAuth, async (req, res) => {
     const profileDetails = await userService.getUser(req.user._id).lean();
-    const creatorCourses = await courseService.getCreatorCourses(req.user._id).lean();
-    const signedUpCourses = await courseService.getUserSignedUpCourses(req.user._id).lean();
-    console.log(signedUpCourses);
-    res.render('profile', { ...profileDetails, createdCourses: creatorCourses, signedUpCourses: signedUpCourses});
+    const createdCoursesCount = profileDetails.createdCourses.length;
+    const signedUpCoursesCount = profileDetails.signedUpCourses.length;
+    
+    res.render('profile', { profileDetails, createdCoursesCount, signedUpCoursesCount});
 });
 
 module.exports = router;
