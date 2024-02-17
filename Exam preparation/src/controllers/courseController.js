@@ -10,13 +10,18 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:courseId/details', async (req, res) => {
-    const course = await courseService.getDetailedOne(req.params.courseId).lean();
 
-    const isCourseOwner = req.user?._id == course.owner._id && course.owner._id;
-    const signUpUsers = course.signUpList.map(user => user.username).join(', ');
-    const isSigned = course.signUpList.some(user => user._id == req.user?._id);
+    try {
+        const course = await courseService.getDetailedOne(req.params.courseId).lean();
 
-    res.render('courses/details', { ...course, isCourseOwner, signUpUsers, isSigned });
+        const isCourseOwner = req.user?._id == course.owner._id && course.owner._id;
+        const signUpUsers = course.signUpList.map(user => user.username).join(', ');
+        const isSigned = course.signUpList.some(user => user._id == req.user?._id);
+
+        res.render('courses/details', { ...course, isCourseOwner, signUpUsers, isSigned });
+    } catch (err) {
+        res.render('404');
+    }
 });
 
 router.get('/:courseId/sign-up', async (req, res) => {
@@ -48,7 +53,7 @@ router.get('/:courseId/edit', isOwner, async (req, res) => {
 
 router.post('/:courseId/edit', isOwner, async (req, res) => {
     const editedCourseData = req.body;
-    
+
     try {
         await courseService.edit(req.params.courseId, editedCourseData);
 
