@@ -10,6 +10,10 @@ exports.getOne = (courseId) => Course.findById(courseId);
 
 exports.getDetailedOne = (courseId) => this.getOne(courseId).populate('owner').populate('signUpList');
 
+exports.getCreatorCourses = (userId) => Course.find({ owner: userId });
+
+exports.getUserSignedUpCourses = (userId) => Course.find({ signUpList: { $in: userId }});
+
 exports.create = async (userId, courseData) => {
 
     const createdCourse = await Course.create({
