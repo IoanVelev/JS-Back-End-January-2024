@@ -3,27 +3,33 @@ const mongoose = require('mongoose');
 const courseSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        minLength: 5
     },
     type: {
         type: String,
-        required: true
+        required: true,
+        minLength: 3
     },
     certificate: {
         type: String,
-        required: true
+        required: true,
+        minLength: 2
     },
     image: {
         type: String,
-        required: true
+        required: true,
+        match: /^https?:\/\//
     },
     description: {
         type: String,
-        required: true
+        required: true,
+        minLength: 10
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     signUpList: [{
         type: mongoose.Types.ObjectId,
