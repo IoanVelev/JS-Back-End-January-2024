@@ -1,6 +1,9 @@
 const Course = require('../models/Course');
 const User = require('../models/User');
 
+
+exports.getLatest = () => Course.find().sort({ createdAt: -1}).limit(3);
+
 exports.getAll = () => Course.find();
 
 exports.getOne = (courseId) => Course.findById(courseId);
