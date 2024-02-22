@@ -20,3 +20,13 @@ MAIN TOPICS AND ACQUIRED SKILLS:
 
 -> Creating an MVC architecture
 
+
+
+CERTIFICATE:
+
+![image](https://github.com/IoanVelev/JS-Back-End-January-2024/assets/131281353/97de20cf-b9a3-44bf-9f34-ed6f3e34284d)
+![image](https://github.com/IoanVelev/JS-Back-End-January-2024/assets/131281353/3d1ab0b0-fcb5-4576-8744-378235b452d8)
+
+
+
+
