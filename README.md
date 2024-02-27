@@ -29,7 +29,9 @@ CERTIFICATE:
 
 
 
-![image](https://github.com/IoanVelev/JS-Back-End-January-2024/assets/131281353/3d1ab0b0-fcb5-4576-8744-378235b452d8)
+![image](https://github.com/IoanVelev/JS-Back-End-January-2024/assets/131281353/4472e878-4e5e-4255-8227-69930ba05a34)
+
+
 
 
 
